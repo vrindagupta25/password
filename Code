@@ -3,4 +3,8 @@ import string
 import random
 def generator():
     small_alphabets=string.ascii_lowercase
-    
+    numbers=string.digits
+    special_characters=string.punctuation
+    all=small_alphabets+capital_alphabets+numbers+special_characters
+    password_Length=int(Length_box.get())
+   
