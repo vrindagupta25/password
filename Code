@@ -14,3 +14,11 @@ def generator():
     if choice.get()==3:
         passwordFeild.insert(0, random.sample(all, password_Length))
   
+Weakradiobutton=Radiobutton(root,text='weak',value='1',variable=choice,font=Font)
+Weakradiobutton.grid(pady=5)
+
+Mediumradiobutton=Radiobutton(root,text='Medium',value='2',variable=choice,font=Font)
+Mediumradiobutton.grid(pady=5)
+
+Strongradiobutton=Radiobutton(root,text='Strong',value='3',variable=choice,font=Font)
+Strongradiobutton.grid(pady=5)
