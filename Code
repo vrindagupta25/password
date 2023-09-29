@@ -7,4 +7,10 @@ def generator():
     special_characters=string.punctuation
     all=small_alphabets+capital_alphabets+numbers+special_characters
     password_Length=int(Length_box.get())
-   
+    if choice.get()==1:
+        passwordFeild.insert(0,random.sample(small_alphabets,password_Length))
+    if choice.get()==2:
+        passwordFeild.insert(0, random.sample(small_alphabets+capital_alphabets, password_Length))
+    if choice.get()==3:
+        passwordFeild.insert(0, random.sample(all, password_Length))
+  
