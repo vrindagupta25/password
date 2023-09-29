@@ -1,1 +1,6 @@
-
+from tkinter import*
+import string
+import random
+def generator():
+    small_alphabets=string.ascii_lowercase
+    
