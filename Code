@@ -37,3 +37,14 @@ Length_box=Spinbox(root,from_=5,to_=18,width=5,font=Font)
 Length_box.grid()
 generateButton=Button(root,text='Generate',font=Font,command=generator)
 generateButton.grid(pady=5)
+LengthLabel=Label(root,text='Password Length',font='ariel 18 bold',bg='black',fg='white')
+LengthLabel.grid()
+
+passwordFeild=Entry(root,width=30,bd=2,font=Font)
+passwordFeild.grid()
+
+CopyButton=Button(root,text='Copy',font=Font)
+CopyButton.grid(pady=5)
+
+
+root.mainloop()
