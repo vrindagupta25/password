@@ -13,6 +13,14 @@ def generator():
         passwordFeild.insert(0, random.sample(small_alphabets+capital_alphabets, password_Length))
     if choice.get()==3:
         passwordFeild.insert(0, random.sample(all, password_Length))
+root=Tk()
+root.config(bg='gray20')
+choice= IntVar()
+
+Font=('times new roman',15,'bold')
+
+passwordLabel=Label(root,text='PASSWORD GENERATOR',font='ariel 18 bold',bg='black',fg='white')
+passwordLabel.grid(pady=10
   
 Weakradiobutton=Radiobutton(root,text='weak',value='1',variable=choice,font=Font)
 Weakradiobutton.grid(pady=5)
