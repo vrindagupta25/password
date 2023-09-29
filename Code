@@ -30,3 +30,10 @@ Mediumradiobutton.grid(pady=5)
 
 Strongradiobutton=Radiobutton(root,text='Strong',value='3',variable=choice,font=Font)
 Strongradiobutton.grid(pady=5)
+LengthLabel=Label(root,text='Password Length',font='ariel 18 bold',bg='black',fg='white')
+LengthLabel.grid()
+
+Length_box=Spinbox(root,from_=5,to_=18,width=5,font=Font)
+Length_box.grid()
+generateButton=Button(root,text='Generate',font=Font,command=generator)
+generateButton.grid(pady=5)
