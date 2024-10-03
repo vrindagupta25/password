@@ -1,50 +1,83 @@
-from tkinter import*
-import string
+import tkinter as tk
+from tkinter import messagebox
 import random
-def generator():
-    small_alphabets=string.ascii_lowercase
-    numbers=string.digits
-    special_characters=string.punctuation
-    all=small_alphabets+capital_alphabets+numbers+special_characters
-    password_Length=int(Length_box.get())
-    if choice.get()==1:
-        passwordFeild.insert(0,random.sample(small_alphabets,password_Length))
-    if choice.get()==2:
-        passwordFeild.insert(0, random.sample(small_alphabets+capital_alphabets, password_Length))
-    if choice.get()==3:
-        passwordFeild.insert(0, random.sample(all, password_Length))
-root=Tk()
-root.config(bg='gray20')
-choice= IntVar()
+import string
 
-Font=('times new roman',15,'bold')
+# Function to generate password
+def generate_password():
+    length = int(length_entry.get())
+    level = var.get()
 
-passwordLabel=Label(root,text='PASSWORD GENERATOR',font='ariel 18 bold',bg='black',fg='white')
-passwordLabel.grid(pady=10
-  
-Weakradiobutton=Radiobutton(root,text='weak',value='1',variable=choice,font=Font)
-Weakradiobutton.grid(pady=5)
+    if length < 4 or length > 32:
+        messagebox.showwarning("Warning", "Length should be between 4 and 32 characters.")
+        return
 
-Mediumradiobutton=Radiobutton(root,text='Medium',value='2',variable=choice,font=Font)
-Mediumradiobutton.grid(pady=5)
+    if level == "Easy":
+        characters = string.ascii_lowercase
+    elif level == "Medium":
+        characters = string.ascii_letters + string.digits
+    else:
+        characters = string.ascii_letters + string.digits + string.punctuation
 
-Strongradiobutton=Radiobutton(root,text='Strong',value='3',variable=choice,font=Font)
-Strongradiobutton.grid(pady=5)
-LengthLabel=Label(root,text='Password Length',font='ariel 18 bold',bg='black',fg='white')
-LengthLabel.grid()
+    password = ''.join(random.choice(characters) for _ in range(length))
+    
+    # Show generated password in black font
+    password_entry.config(state=tk.NORMAL)
+    password_entry.delete(0, tk.END)
+    password_entry.insert(0, password)
+    password_entry.config(state='readonly')
 
-Length_box=Spinbox(root,from_=5,to_=18,width=5,font=Font)
-Length_box.grid()
-generateButton=Button(root,text='Generate',font=Font,command=generator)
-generateButton.grid(pady=5)
-LengthLabel=Label(root,text='Password Length',font='ariel 18 bold',bg='black',fg='white')
-LengthLabel.grid()
+# Function to validate length entry
+def validate_length():
+    try:
+        length = int(length_entry.get())
+        if length < 4 or length > 32:
+            messagebox.showwarning("Warning", "Length should be between 4 and 32 characters.")
+        else:
+            generate_password()
+    except ValueError:
+        messagebox.showerror("Error", "Please enter a valid number for the password length.")
 
-passwordFeild=Entry(root,width=30,bd=2,font=Font)
-passwordFeild.grid()
+# Setting up the main application window
+root = tk.Tk()
+root.title("Password Generator")
+root.geometry("350x340")  # Increased window height for better visibility
+root.config(bg="black")
 
-CopyButton=Button(root,text='Copy',font=Font)
-CopyButton.grid(pady=5)
+# Title label
+title_label = tk.Label(root, text="Password Generator", font=("Arial", 16, "bold"), bg="black", fg="red")
+title_label.pack(pady=5)
 
+# Password length label and entry
+length_label = tk.Label(root, text="Password Length:", font=("Arial", 12), bg="black", fg="red")
+length_label.pack(pady=3)
+length_entry = tk.Entry(root, font=("Arial", 12), justify="center")
+length_entry.pack(pady=3)
 
+# Password difficulty level label
+level_label = tk.Label(root, text="Password Difficulty:", font=("Arial", 12), bg="black", fg="red")
+level_label.pack(pady=3)
+
+# Radio buttons for password difficulty
+var = tk.StringVar(value="Easy")
+easy_radio = tk.Radiobutton(root, text="Easy", variable=var, value="Easy", font=("Arial", 12), bg="black", fg="red", selectcolor="black")
+medium_radio = tk.Radiobutton(root, text="Medium", variable=var, value="Medium", font=("Arial", 12), bg="black", fg="red", selectcolor="black")
+hard_radio = tk.Radiobutton(root, text="Hard", variable=var, value="Hard", font=("Arial", 12), bg="black", fg="red", selectcolor="black")
+
+easy_radio.pack(pady=1)
+medium_radio.pack(pady=1)
+hard_radio.pack(pady=1)
+
+# Generate button
+generate_button = tk.Button(root, text="Generate Password", font=("Arial", 12, "bold"), bg="red", fg="white", command=validate_length)
+generate_button.pack(pady=10)
+
+# Password display label and entry
+password_label = tk.Label(root, text="Generated Password:", font=("Arial", 12), bg="black", fg="red")
+password_label.pack(pady=5)
+
+password_entry = tk.Entry(root, font=("Arial", 12), justify="center", state='readonly', fg="black")
+password_entry.pack(pady=5)
+
+# Start the Tkinter loop
 root.mainloop()
